@@ -6,10 +6,10 @@
             "value": "westus"
         },
         "networkInterfaceName": {
-            "value": "wvmnetsegt0Tool01581"
+            "value": "WVMNETSEGT0TL01581"
         },
         "networkSecurityGroupName": {
-            "value": "WVMNETSEGTTOOL01-nsg"
+            "value": "WVMNETSEGT0TLL01-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -52,7 +52,7 @@
             ]
         },
         "publicIpAddressName": {
-            "value": "WVMNETSEGT0DC01-ip"
+            "value": "WVMNETSEGT0TL01-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -61,10 +61,10 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "WVMNETSEGT0TOOL01"
+            "value": "WVMNETSEGT0TL01"
         },
         "virtualMachineComputerName": {
-            "value": "WVMNETSEGT0TOOL01"
+            "value": "WVMNETSEGT0TL01"
         },
         "virtualMachineRG": {
             "value": "RSG-NetSegT0-Dev"
