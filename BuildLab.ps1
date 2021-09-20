@@ -28,8 +28,8 @@ else {
 }
 
 #Set the Resource Group Name and Location
-$resourceGroupLocation = "eastus"
-$resourceGroupName = "PSLab"
+$resourceGroupLocation = "westus"
+$resourceGroupName = "RSG-NetSegT0-Dev"
 $templateFilePath = ".\template.json"
 $i=1
 
@@ -46,8 +46,9 @@ else {
     Write-Host "Using existing resource group '$resourceGroupName'";
 }
 
-$TemplateFileName = @(".\DC1parameters.json", ".\ORCA1parameters.json", ".\CA1parameters.json", ".\CRL1parameters.json", ".\Tool1parameters.json", ".\CESCEP1parameters.json")
+#$TemplateFileName = @(".\DC1parameters.json", ".\ORCA1parameters.json", ".\CA1parameters.json", ".\CRL1parameters.json", ".\Tool1parameters.json", ".\CESCEP1parameters.json")
+$TemplateFileName = @(".\NetSegTool.json")
 foreach ($Template in $TemplateFileName) {
-    New-AzResourceGroupDeployment -resourceGroupName $resourceGroupName -Name PSLabBuild$i -templateFile $templateFilePath -TemplateParameterFile $Template -Verbose 
+    New-AzResourceGroupDeployment -resourceGroupName $resourceGroupName -Name PSServerBuild$i -templateFile $templateFilePath -TemplateParameterFile $Template -Verbose 
     $i++
 }
