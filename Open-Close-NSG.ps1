@@ -29,5 +29,5 @@ $nsglist = @("DC1-nsg", "orca1-nsg", "crl1-nsg", "EntCA1-nsg") #"CESCEP1-nsg", "
 New-NSGInbound $resourceGroupName $nsglist
 
 #close ports
-#Remove-NSGInbound $resourceGroupName $nsglist
+Remove-NSGInbound $resourceGroupName $nsglist
 
