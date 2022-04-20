@@ -18,11 +18,13 @@ function Remove-NSGInbound {
 }
 
 #Get current public IP
-$myPublicIP = (Invoke-WebRequest -Uri "https://api.ipify.org").content
+#$myPublicIP = (Invoke-WebRequest -Uri "https://api.ipify.org").content
+$myPublicIP = "13.83.64.54,13.83.64.137,13.83.64.157,52.191.227.139,52.191.227.224,128.177.111.126,208.184.4.126,63.147.206.126,209.63.234.126,40.86.184.165"
+
 
 #Target the new Resource Group
 $resourceGroupName = 'PSLab'
-$nsglist = @("DC1-nsg", "orca1-nsg", "crl1-nsg", "EntCA1-nsg") #"CESCEP1-nsg", "tool1-nsg"
+$nsglist = @("WVMNETSEGT0TL01", "WVMNETSEGT0DC01", "WVMNETSEGT0DC01") #"CESCEP1-nsg", "tool1-nsg"
 #Just One:
 #$nsglist = @("tool1-nsg")
 #Open Ports

@@ -11,8 +11,8 @@ Import-Module az
 $Connected = Get-AzContext
 if (!($connected)) {
     # sign in
-    Write-Host "Logging in...";
-    Login-AzAccount;
+    Write-Host "Logging in..."
+    Login-AzAccount
 }
 
 $subs = Get-AzSubscription
@@ -22,32 +22,35 @@ if ($subs.count -gt 1) {
     $subscriptionId = $SubtoUse.SubscriptionId
 }
 else {
-    Write-Host "Selecting subscription '$subscriptionId'";
-    Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+    $subscriptionId = $Subs.Id
+    Write-Host "Selecting subscription '$subscriptionId'"
+    Select-AzSubscription -SubscriptionID $subscriptionId
     $subscriptionId = $Connected.Subscription.id        
 }
 
+pause
 #Set the Resource Group Name and Location
-$resourceGroupLocation = "eastus"
-$resourceGroupName = "PSLab"
+$resourceGroupLocation = "westus"
+$resourceGroupName = "RSG-NetSegT0-Dev"
 $templateFilePath = ".\template.json"
 $i=1
 
 $resourceGroup = Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
 if (!$resourceGroup) {
-    Write-Host "Resource group '$resourceGroupName' does not exist. To create a new resource group, please enter a location.";
+    Write-Host "Resource group '$resourceGroupName' does not exist. To create a new resource group, please enter a location."
     if (!$resourceGroupLocation) {
-        $resourceGroupLocation = Read-Host "resourceGroupLocation";
+        $resourceGroupLocation = Read-Host "resourceGroupLocation"
     }
-    Write-Host "Creating resource group '$resourceGroupName' in location '$resourceGroupLocation'";
+    Write-Host "Creating resource group '$resourceGroupName' in location '$resourceGroupLocation'"
     New-AzResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation
 }
 else {
-    Write-Host "Using existing resource group '$resourceGroupName'";
+    Write-Host "Using existing resource group '$resourceGroupName'"
 }
 
-$TemplateFileName = @(".\DC1parameters.json", ".\ORCA1parameters.json", ".\CA1parameters.json", ".\CRL1parameters.json", ".\Tool1parameters.json", ".\CESCEP1parameters.json")
+#$TemplateFileName = @(".\DC1parameters.json", ".\ORCA1parameters.json", ".\CA1parameters.json", ".\CRL1parameters.json", ".\Tool1parameters.json", ".\CESCEP1parameters.json")
+$TemplateFileName = @(".\NetSegTool.json")
 foreach ($Template in $TemplateFileName) {
-    New-AzResourceGroupDeployment -resourceGroupName $resourceGroupName -Name PSLabBuild$i -templateFile $templateFilePath -TemplateParameterFile $Template -Verbose 
+    New-AzResourceGroupDeployment -resourceGroupName $resourceGroupName -Name PSServerBuild$i -templateFile $templateFilePath -TemplateParameterFile $Template -Verbose 
     $i++
 }
